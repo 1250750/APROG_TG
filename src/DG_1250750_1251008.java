@@ -79,7 +79,7 @@ public class DG_1250750_1251008 {
 
 
 
-    public static void armazenarMatriz(int[][] matriz){
+    private static void armazenarMatriz(int[][] matriz){
 
         for (int numeroPessoas = 0; numeroPessoas < matriz.length; numeroPessoas++) {
             for (int dias = 0; dias < matriz[numeroPessoas].length; dias++) {
@@ -91,7 +91,7 @@ public class DG_1250750_1251008 {
 
 
     //===========================================================================================
-    public static void imprimirMatriz(int[][] matriz) {
+    private static void imprimirMatriz(int[][] matriz) {
 
         System.out.print("day       : ");
         for (int dia = 0; dia < matriz[0].length; dia++) {
@@ -113,7 +113,7 @@ public class DG_1250750_1251008 {
 
 
     //================================================================================================
-    public static void mediaHumorPorDia(int[][] matriz){
+    private static void mediaHumorPorDia(int[][] matriz){
 
         System.out.print("day       : ");
         for (int dia = 0; dia < matriz[0].length; dia++) {
@@ -144,7 +144,7 @@ public class DG_1250750_1251008 {
 
     //=====================================================================================
 
-    public static void mediaHumor(int [][] matriz){
+    private static void mediaHumor(int [][] matriz){
 
         double media;
         for (int pessoa = 0; pessoa < matriz.length ; pessoa++) {
@@ -160,7 +160,7 @@ public class DG_1250750_1251008 {
 
 
     //======================================================================================
-    public static void maiorHumor(int[][] matriz){
+    private static void maiorHumor(int[][] matriz){
 
 
         double[] mediasHumor = new double[matriz[0].length];
@@ -196,7 +196,7 @@ public class DG_1250750_1251008 {
     } //tirar duvida com teach
 
     //===============================================================================================
-    public static void percentagemHumor(int[][] matriz){
+    private static void percentagemHumor(int[][] matriz){
         double percentagem;
         for (int humor = MAX_MOOD; humor >=MIN_MOOD ; humor--) {
             int soma=0;
@@ -213,7 +213,7 @@ public class DG_1250750_1251008 {
     }
     //=============================================================================================
 
-    public static void emocionalDisorders(int[][] matriz){
+    private static void emocionalDisorders(int[][] matriz){
         boolean encontradasDisorders = false;
 
         for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
@@ -256,7 +256,7 @@ public class DG_1250750_1251008 {
 
     //==============================================================================
 
-    public static void graficoHumor(int [][] matriz){
+    private static void graficoHumor(int [][] matriz){
         System.out.println();
         for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
             System.out.printf("Person #%d:%n",pessoa);
@@ -297,7 +297,7 @@ public class DG_1250750_1251008 {
     }
 
     //======================================================================================
-    public static void terapia(int[][] matriz){
+    private static void terapia(int[][] matriz){
 
         for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
             int diasLowHumor = 0;     // contador corrente
@@ -334,7 +334,7 @@ public class DG_1250750_1251008 {
     }
 
     //=======================================================================================
-    public static void humorSemelhante(int [][] matriz){
+    private static void humorSemelhante(int [][] matriz){
         int primeiraPessoaSemelhante=0;
         int segundaPessoaSemelhante=0;
         int humorSemelhanteFinal=0;
