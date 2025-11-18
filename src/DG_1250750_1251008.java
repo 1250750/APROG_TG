@@ -93,22 +93,32 @@ public class DG_1250750_1251008 {
     //===========================================================================================
     private static void imprimirMatriz(int[][] matriz) {
 
-        System.out.print("day       : ");
-        for (int dia = 0; dia < matriz[0].length; dia++) {
+        int dias = matriz[0].length;
 
+        // linha do cabeçalho
+        System.out.print("day       : ");
+        for (int dia = 0; dia < dias; dia++) {
             System.out.printf("%3d ", dia);
         }
         System.out.println();
-        System.out.println("----------|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|");
 
+        // linha de separadores dinâmica
+        System.out.print("----------");
+        for (int dia = 0; dia < dias; dia++) {
+            System.out.print("|---");
+        }
+        System.out.println("|");
+
+        // impressão da matriz
         for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
             System.out.printf("Person #%d : ", pessoa);
-            for (int dia = 0; dia < matriz[pessoa].length; dia++) {
+            for (int dia = 0; dia < dias; dia++) {
                 System.out.printf("%3d ", matriz[pessoa][dia]);
             }
             System.out.println();
-        } // o 3d fica alinhado mas se ponho 2d fica todo desformatado
+        }
     }
+
 
 
 
