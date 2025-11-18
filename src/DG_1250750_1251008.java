@@ -34,21 +34,13 @@ public class DG_1250750_1251008 {
         armazenarMatriz(moods);
 
         //alinea b
-        System.out.println("b) Mood (level/day(person)");
         imprimirMatriz(moods);
-        System.out.println();
 
         //alinea c
-        System.out.println("c) Average mood each day:");
         mediaHumorPorDia(moods);
 
-        System.out.println();
-        System.out.println();
-
         //alinea d
-        System.out.println("d) Average of each person's mood:");
         mediaHumor(moods);
-        System.out.println();
 
         //alinea e
         maiorHumor(moods);
@@ -100,11 +92,12 @@ public class DG_1250750_1251008 {
     //===========================================================================================
     private static void imprimirMatriz(int[][] matriz) {
 
-        int dias = matriz[0].length;
+        System.out.println("b) Mood (level/day(person)");
+
 
         // cabeçalho dos dias
         System.out.print("day       : ");
-        for (int dia = 0; dia < dias; dia++) {
+        for (int dia = 0; dia < matriz[0].length; dia++) {
             // 1 espaço + número alinhado à esquerda em 2 colunas + 1 espaço = 4 chars por dia
             System.out.printf(" %-2d ", dia);
         }
@@ -112,7 +105,7 @@ public class DG_1250750_1251008 {
 
         // linha de separadores dinâmica
         System.out.print("----------");
-        for (int dia = 0; dia < dias; dia++) {
+        for (int dia = 0; dia < matriz[0].length; dia++) {
             System.out.print("|---");
         }
         System.out.println("|");
@@ -120,13 +113,16 @@ public class DG_1250750_1251008 {
         // matriz de moods
         for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
             System.out.printf("Person #%d : ", pessoa);
-            for (int dia = 0; dia < dias; dia++) {
+            for (int dia = 0; dia < matriz[0].length; dia++) {
                 // igual ao cabeçalho: 4 chars por coluna
                 System.out.printf(" %-2d ", matriz[pessoa][dia]);
             }
             System.out.println();
         }
+
+        System.out.println();
     }
+
 
 
 
@@ -134,18 +130,24 @@ public class DG_1250750_1251008 {
 
 
     //================================================================================================
-    private static void mediaHumorPorDia(int[][] matriz){
+    private static void mediaHumorPorDia(int[][] matriz){ // todo mudar a tabela para dar os dias
+
+        System.out.println("c) Average mood each day:");
 
         System.out.print("day       : ");
         for (int dia = 0; dia < matriz[0].length; dia++) {
-
-            System.out.printf("%3d ", dia);
+            // igual à alínea b): 1 espaço + numero em 2 colunas + 1 espaço
+            System.out.printf(" %-2d ", dia);
         }
         System.out.println();
-        System.out.println("----------|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|");
+
+        System.out.print("----------");
+        for (int dias = 0; dias < matriz[0].length; dias++) {
+            System.out.print("|---");
+        }
+        System.out.println("|");
 
         System.out.print("mood      : ");
-
 
         int somaPessoas = matriz.length;
         int somaValores = 0;
@@ -153,19 +155,25 @@ public class DG_1250750_1251008 {
         for (int dia = 0; dia < matriz[0].length; dia++) {
             for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
                 somaValores += matriz[pessoa][dia];
-
             }
             double media = (double) somaValores / somaPessoas;
-            System.out.printf("%-3.1f ", media);
+
+
+            System.out.printf(" %.1f ", media);
+
             somaValores = 0;
         }
 
-
+        System.out.println();
+        System.out.println();
     }
+
 
     //=====================================================================================
 
     private static void mediaHumor(int [][] matriz){
+
+        System.out.println("d) Average of each person's mood:");
 
         double media;
         for (int pessoa = 0; pessoa < matriz.length ; pessoa++) {
@@ -176,6 +184,9 @@ public class DG_1250750_1251008 {
             media = (double) soma / matriz[0].length;
             System.out.printf("Person #%d : %.1f%n",pessoa, media);
         }
+
+        System.out.println();
+
     }
 
 
