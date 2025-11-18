@@ -1,8 +1,13 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class DG_1250750_1251008 {
 
-    static Scanner input = new Scanner(System.in);
+
+    static File file = new File("C:\\Users\\touby\\IdeaProjects\\ProjetoFinal\\src\\input.txt");
+    static Scanner input;
+
 
     static final int MAX_MOOD = 5;
     static final int MIN_MOOD = 1;
@@ -15,7 +20,9 @@ public class DG_1250750_1251008 {
     static final int MIN_PESSOAS = 0;
     static final int MIN_DIAS = 0;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
+
+        input = new Scanner(file);
         input.nextLine(); // nao ser a primeira linha
 
         int numeroPessoas = lerComMinimo(MIN_PESSOAS);
@@ -95,10 +102,11 @@ public class DG_1250750_1251008 {
 
         int dias = matriz[0].length;
 
-        // linha do cabeçalho
+        // cabeçalho dos dias
         System.out.print("day       : ");
         for (int dia = 0; dia < dias; dia++) {
-            System.out.printf("%3d ", dia);
+            // 1 espaço + número alinhado à esquerda em 2 colunas + 1 espaço = 4 chars por dia
+            System.out.printf(" %-2d ", dia);
         }
         System.out.println();
 
@@ -109,15 +117,18 @@ public class DG_1250750_1251008 {
         }
         System.out.println("|");
 
-        // impressão da matriz
+        // matriz de moods
         for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
             System.out.printf("Person #%d : ", pessoa);
             for (int dia = 0; dia < dias; dia++) {
-                System.out.printf("%3d ", matriz[pessoa][dia]);
+                // igual ao cabeçalho: 4 chars por coluna
+                System.out.printf(" %-2d ", matriz[pessoa][dia]);
             }
             System.out.println();
         }
     }
+
+
 
 
 
