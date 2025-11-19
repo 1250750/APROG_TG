@@ -50,11 +50,11 @@ public class DG_1250750_1251008 {
         //alinea g
         emocionalDisorders(moods);
 
-        //alinea i
-        terapia(moods);
-
         //alinea h
         graficoHumor(moods);
+
+        //alinea i
+        terapia(moods);
 
         //alinea j
         humorSemelhante(moods);
