@@ -7,7 +7,6 @@ public class DG_1250750_1251008 {
     static File file = new File("src//input.txt");
     static Scanner input;
 
-
     static final int MAX_MOOD = 5;
     static final int MIN_MOOD = 1;
 
@@ -22,7 +21,7 @@ public class DG_1250750_1251008 {
     public static void main(String[] args) throws FileNotFoundException {
 
         input = new Scanner(file);
-        input.nextLine(); // nao ser a primeira linha
+        input.nextLine(); // nao ler a primeira linha
 
         int numeroPessoas = lerComMinimo(MIN_PESSOAS);
         int dias = lerComMinimo(MIN_DIAS);
@@ -58,48 +57,88 @@ public class DG_1250750_1251008 {
 
         //alinea j
         humorSemelhante(moods);
-
     }
 
-
-
     private static void armazenarMatriz(int[][] matriz){
-
         for (int numeroPessoas = 0; numeroPessoas < matriz.length; numeroPessoas++) {
             for (int dias = 0; dias < matriz[numeroPessoas].length; dias++) {
                 matriz[numeroPessoas][dias] = lerNoIntervalo(MIN_MOOD, MAX_MOOD);
             }
         }
-
     }
 
+    // --- metodos reutilizaveis ----------------------------------------------------
+
+    private static void imprimirCabecalhoDias(int numDias) {
+        System.out.print("day       : ");
+        for (int dia = 0; dia < numDias; dia++) {
+            System.out.printf(" %-2d ", dia);
+        }
+        System.out.println();
+    }
+
+    private static void imprimirSeparadorDias(int numDias) {
+        System.out.print("----------");
+        for (int dia = 0; dia < numDias; dia++) {
+            System.out.print("|---");
+        }
+        System.out.println("|");
+    }
+
+    private static double[] calcularMediasPorDia(int[][] matriz) {
+        int numDias = matriz[0].length;
+        int numPessoas = matriz.length;
+        double[] medias = new double[numDias];
+
+        for (int dia = 0; dia < numDias; dia++) {
+            int somaValores = 0;
+            for (int pessoa = 0; pessoa < numPessoas; pessoa++) {
+                somaValores += matriz[pessoa][dia];
+            }
+            medias[dia] = (double) somaValores / numPessoas;
+        }
+
+        return medias;
+    }
+
+    private static int maxConsecutiveLowMood(int[] matriz) {
+        int diasLowHumor = 0;
+        int maxDiasBaixo = 0;
+        int valorDiaAnterior = MAX_MOOD;
+
+        for (int dia = 0; dia < matriz.length; dia++) {
+            int valor = matriz[dia];
+
+            if (valor < MAX_LOW_MOOD) {
+                if (valorDiaAnterior < MAX_LOW_MOOD) {
+                    diasLowHumor++;
+                } else {
+                    diasLowHumor = 1;
+                }
+                if (diasLowHumor > maxDiasBaixo) {
+                    maxDiasBaixo = diasLowHumor;
+                }
+            } else {
+                diasLowHumor = 0;
+            }
+
+            valorDiaAnterior = valor;
+        }
+
+        return maxDiasBaixo;
+    }
 
     //===========================================================================================
     private static void imprimirMatriz(int[][] matriz) {
 
         System.out.println("b) Mood (level/day(person)");
 
+        imprimirCabecalhoDias(matriz[0].length);
+        imprimirSeparadorDias(matriz[0].length);
 
-        // cabeçalho dos dias
-        System.out.print("day       : ");
-        for (int dia = 0; dia < matriz[0].length; dia++) {
-            // 1 espaço + número alinhado à esquerda em 2 colunas + 1 espaço = 4 chars por dia
-            System.out.printf(" %-2d ", dia);
-        }
-        System.out.println();
-
-        // linha de separadores dinâmica
-        System.out.print("----------");
-        for (int dia = 0; dia < matriz[0].length; dia++) {
-            System.out.print("|---");
-        }
-        System.out.println("|");
-
-        // matriz de moods
         for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
             System.out.printf("Person #%d : ", pessoa);
             for (int dia = 0; dia < matriz[0].length; dia++) {
-                // igual ao cabeçalho: 4 chars por coluna
                 System.out.printf(" %-2d ", matriz[pessoa][dia]);
             }
             System.out.println();
@@ -108,51 +147,25 @@ public class DG_1250750_1251008 {
         System.out.println();
     }
 
-
-
-
-
-
-
     //================================================================================================
     private static void mediaHumorPorDia(int[][] matriz){
 
         System.out.println("c) Average mood each day:");
 
-        System.out.print("day       : ");
-        for (int dia = 0; dia < matriz[0].length; dia++) {
-            // igual à alínea b): 1 espaço + numero em 2 colunas + 1 espaço
-            System.out.printf(" %-2d ", dia);
-        }
-        System.out.println();
-
-        System.out.print("----------");
-        for (int dias = 0; dias < matriz[0].length; dias++) {
-            System.out.print("|---");
-        }
-        System.out.println("|");
+        imprimirCabecalhoDias(matriz[0].length);
+        imprimirSeparadorDias(matriz[0].length);
 
         System.out.print("mood      :");
 
-        int somaPessoas = matriz.length;
-        int somaValores = 0;
+        double[] medias = calcularMediasPorDia(matriz);
 
-        for (int dia = 0; dia < matriz[0].length; dia++) {
-            for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
-                somaValores += matriz[pessoa][dia];
-            }
-            double media = (double) somaValores / somaPessoas;
-
-
-            System.out.printf("%.1f ", media);
-
-            somaValores = 0;
+        for (int dia = 0; dia < medias.length; dia++) {
+            System.out.printf("%.1f ", medias[dia]);
         }
 
         System.out.println();
         System.out.println();
     }
-
 
     //=====================================================================================
 
@@ -171,45 +184,27 @@ public class DG_1250750_1251008 {
         }
 
         System.out.println();
-
     }
-
-
 
     //======================================================================================
     private static void maiorHumor(int[][] matriz){
 
-        double[] mediasHumor = new double[matriz[0].length];
-
-        int somaPessoas = matriz.length;
-        int somaValores = 0;
-
-        for (int dia = 0; dia < matriz[0].length; dia++) {
-            for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
-                somaValores += matriz[pessoa][dia];
-            }
-
-            double media = (double) somaValores / somaPessoas;
-            mediasHumor[dia] = media;
-            somaValores = 0;
-        }
+        double[] mediasHumor = calcularMediasPorDia(matriz);
 
         double maiorHumor = mediasHumor[0];
-        String diasComMaiorMedia = " ";
+        String diasComMaiorMedia = "";
 
         // encontrar o maior valor
-        for (int dias = 0; dias < mediasHumor.length; dias++) {
+        for (int dias = 1; dias < mediasHumor.length; dias++) {
             if (mediasHumor[dias] > maiorHumor) {
                 maiorHumor = mediasHumor[dias];
             }
         }
 
         // juntar todos os dias empatados
-        diasComMaiorMedia = "";
         for (int dias = 0; dias < mediasHumor.length; dias++) {
-            if (Math.abs(mediasHumor[dias] - maiorHumor) < 0.00001) { //Porque ao dar um valor double vai ter várias casas decimais e nem sempre ser igual, 3,299991 e diferente de 3,299992 por isso faço essa verificação. Se a diferenca for muito pequena, sao iguais.
+            if (Math.abs(mediasHumor[dias] - maiorHumor) < 0.00001) { // verificação para doubles
                 diasComMaiorMedia += dias + " ";
-
             }
         }
 
@@ -218,7 +213,6 @@ public class DG_1250750_1251008 {
         System.out.println();
         System.out.println();
     }
-
 
     //===============================================================================================
     private static void percentagemHumor(int[][] matriz){
@@ -240,39 +234,17 @@ public class DG_1250750_1251008 {
 
         System.out.println();
     }
-    //=============================================================================================
 
+    //=============================================================================================
     private static void emocionalDisorders(int[][] matriz){
         System.out.println("g) People with emotional disorders:");
 
         boolean encontradasDisorders = false;
 
         for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
-            int diasHumorBaixo = 0;
-            int maxDiasBaixo = 0;
-            int valorDiaAnterior = MAX_MOOD;
 
-            for (int dia = 0; dia < matriz[0].length; dia++) {
+            int maxDiasBaixo = maxConsecutiveLowMood(matriz[pessoa]);
 
-                int valor = matriz[pessoa][dia];
-                if (valor < MAX_LOW_MOOD) {
-                    if (valorDiaAnterior < MAX_LOW_MOOD) {
-                        diasHumorBaixo++;
-                    }else {
-                        diasHumorBaixo = 1;
-                    }
-
-                    if (diasHumorBaixo > maxDiasBaixo) {
-                        maxDiasBaixo = diasHumorBaixo;
-
-                    }
-                } else{
-                    diasHumorBaixo = 0;
-                }
-
-                valorDiaAnterior = valor;
-
-            }
             if (maxDiasBaixo >= 2){ //tem de ser 2 para serem consecutivos
                 System.out.printf("Person #%d : %d consecutive days%n", pessoa, maxDiasBaixo);
                 encontradasDisorders = true;
@@ -283,17 +255,14 @@ public class DG_1250750_1251008 {
         }
 
         System.out.println();
-
-
     }
 
     //==============================================================================
-
     private static void graficoHumor(int [][] matriz){
 
         System.out.println("h) People's Mood Level Charts:");
-
         System.out.println();
+
         for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
             System.out.printf("Person #%d:%n",pessoa);
             int contador2=0;
@@ -339,34 +308,14 @@ public class DG_1250750_1251008 {
         System.out.println("i) Recommended therapy:");
 
         for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
-            int diasLowHumor = 0;     // contador corrente
-            int maxDiasBaixo = 0;       // máximo por pessoa
-            int valorDiaAnterior = MAX_MOOD;  // reinicia por pessoa, MAX_MOOD nunca vai ser menor que o low mood
 
-            for (int dia = 0; dia < matriz[0].length; dia++) {
-                int valor = matriz[pessoa][dia];
-
-                if (valor < MAX_LOW_MOOD) {                 // está em low mood
-                    if (valorDiaAnterior < MAX_LOW_MOOD) {  // estava ontem?
-                        diasLowHumor++;                   // continua sequência
-                    } else {
-                        diasLowHumor = 1;                 // começa a sequência
-                    }
-                    if (diasLowHumor > maxDiasBaixo) {
-                        maxDiasBaixo = diasLowHumor;
-                    }
-                } else {
-                    diasLowHumor = 0;                     // quebra a sequência
-                }
-
-                valorDiaAnterior = valor;
-            }
+            int maxDiasBaixo = maxConsecutiveLowMood(matriz[pessoa]);
 
             if (maxDiasBaixo >= VAL_TERAPIA_PSICOLOGICO ) {
                 System.out.printf("Person #%d: psychological support%n", pessoa);
             }
             if (maxDiasBaixo >= VAL_TERAPIA_MUSICA && maxDiasBaixo < VAL_TERAPIA_PSICOLOGICO) {
-                System.out.printf("Penson #%d: listen to music%n", pessoa);
+                System.out.printf("Person #%d: listen to music%n", pessoa);
             }
             // se maxDiasBaixo < 2, não imprime nada para essa pessoa
         }
@@ -401,10 +350,7 @@ public class DG_1250750_1251008 {
         }
 
         System.out.println();
-
     }
-
-
 
     //======================================================================================
     public static int lerNoIntervalo(int min, int max) {
@@ -422,5 +368,4 @@ public class DG_1250750_1251008 {
         } while (valor < min);
         return valor;
     }
-
 }
