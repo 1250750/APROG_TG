@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class DG_1250750_1251008 {
 
+    //ola
+
     static File file = new File("C:\\Users\\touby\\IdeaProjects\\ProjetoFinal\\src\\input.txt");
     static Scanner input;
 
@@ -179,7 +181,6 @@ public class DG_1250750_1251008 {
     //======================================================================================
     private static void maiorHumor(int[][] matriz){
 
-
         double[] mediasHumor = new double[matriz[0].length];
 
         int somaPessoas = matriz.length;
@@ -188,7 +189,6 @@ public class DG_1250750_1251008 {
         for (int dia = 0; dia < matriz[0].length; dia++) {
             for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
                 somaValores += matriz[pessoa][dia];
-
             }
 
             double media = (double) somaValores / somaPessoas;
@@ -196,24 +196,30 @@ public class DG_1250750_1251008 {
             somaValores = 0;
         }
 
-        double maiorHumor = mediasHumor[0] ;
-        String diasComMaiorMedia = "";
+        double maiorHumor = mediasHumor[0];
+        String diasComMaiorMedia = "0 ";
 
+        // encontrar o maior valor
         for (int dias = 0; dias < mediasHumor.length; dias++) {
             if (mediasHumor[dias] > maiorHumor) {
                 maiorHumor = mediasHumor[dias];
-                diasComMaiorMedia = diasComMaiorMedia + dias + "";
             }
-
-
         }
 
-        System.out.printf("e) Days with the highest average mood (%.1f) : %s ", maiorHumor, diasComMaiorMedia);
+        // juntar todos os dias empatados
+        diasComMaiorMedia = "";
+        for (int dias = 0; dias < mediasHumor.length; dias++) {
+            if (Math.abs(mediasHumor[dias] - maiorHumor) < 0.00001) {
+                diasComMaiorMedia += dias + " ";
+            }
+        }
+
+        System.out.printf("e) Days with the highest average mood (%.1f) : %s", maiorHumor, diasComMaiorMedia);
 
         System.out.println();
         System.out.println();
+    }
 
-    } //tirar duvida com teach
 
     //===============================================================================================
     private static void percentagemHumor(int[][] matriz){
