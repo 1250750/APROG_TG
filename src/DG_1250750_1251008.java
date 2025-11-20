@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class DG_1250750_1251008 {
 
-    static File file = new File("C:\\Users\\touby\\IdeaProjects\\ProjetoFinal\\src\\input.txt");
+    static File file = new File("src//input.txt");
     static Scanner input;
 
 
