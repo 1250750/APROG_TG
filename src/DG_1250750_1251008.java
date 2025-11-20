@@ -1,8 +1,12 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class DG_1250750_1251008 {
 
-    static Scanner input = new Scanner(System.in);
+    static File file = new File("C:\\Users\\touby\\IdeaProjects\\ProjetoFinal\\src\\input.txt");
+    static Scanner input;
+
 
     static final int MAX_MOOD = 5;
     static final int MIN_MOOD = 1;
@@ -15,7 +19,9 @@ public class DG_1250750_1251008 {
     static final int MIN_PESSOAS = 0;
     static final int MIN_DIAS = 0;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
+
+        input = new Scanner(file);
         input.nextLine(); // nao ser a primeira linha
 
         int numeroPessoas = lerComMinimo(MIN_PESSOAS);
@@ -27,59 +33,37 @@ public class DG_1250750_1251008 {
         armazenarMatriz(moods);
 
         //alinea b
-        System.out.println("b) Mood (level/day(person)");
         imprimirMatriz(moods);
-        System.out.println();
 
         //alinea c
-        System.out.println("c) Average mood each day:");
         mediaHumorPorDia(moods);
 
-        System.out.println();
-        System.out.println();
-
         //alinea d
-        System.out.println("d) Average of each person's mood:");
         mediaHumor(moods);
-        System.out.println();
 
         //alinea e
         maiorHumor(moods);
-        System.out.println();
-        System.out.println();
 
         //alinea f
-        System.out.println("f) Percentage of mood levels:");
         percentagemHumor(moods);
-        System.out.println();
 
         //alinea g
-        System.out.println("g) People with emotional disorders:");
         emocionalDisorders(moods);
-        System.out.println();
-
-        //alinea i
-        System.out.println("i) Recommended therapy:");
-        terapia(moods);
-        System.out.println();
 
         //alinea h
-        System.out.println("h) People's Mood Level Charts:");
         graficoHumor(moods);
-        System.out.println();
 
+        //alinea i
+        terapia(moods);
 
         //alinea j
         humorSemelhante(moods);
-        System.out.println();
-
-
 
     }
 
 
 
-    public static void armazenarMatriz(int[][] matriz){
+    private static void armazenarMatriz(int[][] matriz){
 
         for (int numeroPessoas = 0; numeroPessoas < matriz.length; numeroPessoas++) {
             for (int dias = 0; dias < matriz[numeroPessoas].length; dias++) {
@@ -91,40 +75,64 @@ public class DG_1250750_1251008 {
 
 
     //===========================================================================================
-    public static void imprimirMatriz(int[][] matriz) {
+    private static void imprimirMatriz(int[][] matriz) {
 
+        System.out.println("b) Mood (level/day(person)");
+
+
+        // cabeçalho dos dias
         System.out.print("day       : ");
         for (int dia = 0; dia < matriz[0].length; dia++) {
-
-            System.out.printf("%3d ", dia);
+            // 1 espaço + número alinhado à esquerda em 2 colunas + 1 espaço = 4 chars por dia
+            System.out.printf(" %-2d ", dia);
         }
         System.out.println();
-        System.out.println("----------|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|");
 
+        // linha de separadores dinâmica
+        System.out.print("----------");
+        for (int dia = 0; dia < matriz[0].length; dia++) {
+            System.out.print("|---");
+        }
+        System.out.println("|");
+
+        // matriz de moods
         for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
             System.out.printf("Person #%d : ", pessoa);
-            for (int dia = 0; dia < matriz[pessoa].length; dia++) {
-                System.out.printf("%3d ", matriz[pessoa][dia]);
+            for (int dia = 0; dia < matriz[0].length; dia++) {
+                // igual ao cabeçalho: 4 chars por coluna
+                System.out.printf(" %-2d ", matriz[pessoa][dia]);
             }
             System.out.println();
-        } // o 3d fica alinhado mas se ponho 2d fica todo desformatado
+        }
+
+        System.out.println();
     }
 
 
 
+
+
+
+
     //================================================================================================
-    public static void mediaHumorPorDia(int[][] matriz){
+    private static void mediaHumorPorDia(int[][] matriz){ // todo mudar a tabela para dar os dias
+
+        System.out.println("c) Average mood each day:");
 
         System.out.print("day       : ");
         for (int dia = 0; dia < matriz[0].length; dia++) {
-
-            System.out.printf("%3d ", dia);
+            // igual à alínea b): 1 espaço + numero em 2 colunas + 1 espaço
+            System.out.printf(" %-2d ", dia);
         }
         System.out.println();
-        System.out.println("----------|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|");
+
+        System.out.print("----------");
+        for (int dias = 0; dias < matriz[0].length; dias++) {
+            System.out.print("|---");
+        }
+        System.out.println("|");
 
         System.out.print("mood      : ");
-
 
         int somaPessoas = matriz.length;
         int somaValores = 0;
@@ -132,19 +140,25 @@ public class DG_1250750_1251008 {
         for (int dia = 0; dia < matriz[0].length; dia++) {
             for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
                 somaValores += matriz[pessoa][dia];
-
             }
             double media = (double) somaValores / somaPessoas;
-            System.out.printf("%-3.1f ", media);
+
+
+            System.out.printf(" %.1f ", media);
+
             somaValores = 0;
         }
 
-
+        System.out.println();
+        System.out.println();
     }
+
 
     //=====================================================================================
 
-    public static void mediaHumor(int [][] matriz){
+    private static void mediaHumor(int [][] matriz){
+
+        System.out.println("d) Average of each person's mood:");
 
         double media;
         for (int pessoa = 0; pessoa < matriz.length ; pessoa++) {
@@ -155,12 +169,15 @@ public class DG_1250750_1251008 {
             media = (double) soma / matriz[0].length;
             System.out.printf("Person #%d : %.1f%n",pessoa, media);
         }
+
+        System.out.println();
+
     }
 
 
 
     //======================================================================================
-    public static void maiorHumor(int[][] matriz){
+    private static void maiorHumor(int[][] matriz){
 
 
         double[] mediasHumor = new double[matriz[0].length];
@@ -193,10 +210,15 @@ public class DG_1250750_1251008 {
 
         System.out.printf("e) Days with the highest average mood (%.1f) : %s ", maiorHumor, diasComMaiorMedia);
 
+        System.out.println();
+        System.out.println();
+
     } //tirar duvida com teach
 
     //===============================================================================================
-    public static void percentagemHumor(int[][] matriz){
+    private static void percentagemHumor(int[][] matriz){
+        System.out.println("f) Percentage of mood levels:");
+
         double percentagem;
         for (int humor = MAX_MOOD; humor >=MIN_MOOD ; humor--) {
             int soma=0;
@@ -210,10 +232,14 @@ public class DG_1250750_1251008 {
             percentagem=((double) soma/(matriz.length*matriz[0].length))*100;
             System.out.printf("Mood #%d : %.1f%%%n",humor,percentagem);
         }
+
+        System.out.println();
     }
     //=============================================================================================
 
-    public static void emocionalDisorders(int[][] matriz){
+    private static void emocionalDisorders(int[][] matriz){
+        System.out.println("g) People with emotional disorders:");
+
         boolean encontradasDisorders = false;
 
         for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
@@ -251,12 +277,17 @@ public class DG_1250750_1251008 {
             System.out.println("Ninguem");
         }
 
+        System.out.println();
+
 
     }
 
     //==============================================================================
 
-    public static void graficoHumor(int [][] matriz){
+    private static void graficoHumor(int [][] matriz){
+
+        System.out.println("h) People's Mood Level Charts:");
+
         System.out.println();
         for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
             System.out.printf("Person #%d:%n",pessoa);
@@ -294,10 +325,13 @@ public class DG_1250750_1251008 {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     //======================================================================================
-    public static void terapia(int[][] matriz){
+    private static void terapia(int[][] matriz){
+
+        System.out.println("i) Recommended therapy:");
 
         for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
             int diasLowHumor = 0;     // contador corrente
@@ -331,10 +365,11 @@ public class DG_1250750_1251008 {
             }
             // se maxDiasBaixo < 2, não imprime nada para essa pessoa
         }
+        System.out.println();
     }
 
     //=======================================================================================
-    public static void humorSemelhante(int [][] matriz){
+    private static void humorSemelhante(int [][] matriz){
         int primeiraPessoaSemelhante=0;
         int segundaPessoaSemelhante=0;
         int humorSemelhanteFinal=0;
@@ -359,6 +394,8 @@ public class DG_1250750_1251008 {
         }else{
             System.out.printf("j) People with the most similar moods: (person #%d and Person #%d have the same mood on %d days)",segundaPessoaSemelhante,primeiraPessoaSemelhante,humorSemelhanteFinal);
         }
+
+        System.out.println();
 
     }
 
