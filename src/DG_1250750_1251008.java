@@ -363,10 +363,10 @@ public class DG_1250750_1251008 {
             }
 
             if (maxDiasBaixo >= VAL_TERAPIA_PSICOLOGICO ) {
-                System.out.printf("Pessoa #%d: psychological support%n", pessoa);
+                System.out.printf("Person #%d: psychological support%n", pessoa);
             }
             if (maxDiasBaixo >= VAL_TERAPIA_MUSICA && maxDiasBaixo < VAL_TERAPIA_PSICOLOGICO) {
-                System.out.printf("Pessoa #%d: listen to music%n", pessoa);
+                System.out.printf("Penson #%d: listen to music%n", pessoa);
             }
             // se maxDiasBaixo < 2, não imprime nada para essa pessoa
         }
