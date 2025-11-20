@@ -115,7 +115,7 @@ public class DG_1250750_1251008 {
 
 
     //================================================================================================
-    private static void mediaHumorPorDia(int[][] matriz){ // todo mudar a tabela para dar os dias
+    private static void mediaHumorPorDia(int[][] matriz){
 
         System.out.println("c) Average mood each day:");
 
@@ -132,7 +132,7 @@ public class DG_1250750_1251008 {
         }
         System.out.println("|");
 
-        System.out.print("mood      : ");
+        System.out.print("mood      :");
 
         int somaPessoas = matriz.length;
         int somaValores = 0;
@@ -144,7 +144,7 @@ public class DG_1250750_1251008 {
             double media = (double) somaValores / somaPessoas;
 
 
-            System.out.printf(" %.1f ", media);
+            System.out.printf("%.1f ", media);
 
             somaValores = 0;
         }
@@ -195,7 +195,7 @@ public class DG_1250750_1251008 {
         }
 
         double maiorHumor = mediasHumor[0];
-        String diasComMaiorMedia = "0 ";
+        String diasComMaiorMedia = " ";
 
         // encontrar o maior valor
         for (int dias = 0; dias < mediasHumor.length; dias++) {
@@ -207,8 +207,9 @@ public class DG_1250750_1251008 {
         // juntar todos os dias empatados
         diasComMaiorMedia = "";
         for (int dias = 0; dias < mediasHumor.length; dias++) {
-            if (Math.abs(mediasHumor[dias] - maiorHumor) < 0.00001) {
+            if (Math.abs(mediasHumor[dias] - maiorHumor) < 0.00001) { //Porque ao dar um valor double vai ter várias casas decimais e nem sempre ser igual, 3,299991 e diferente de 3,299992 por isso faço essa verificação. Se a diferenca for muito pequena, sao iguais.
                 diasComMaiorMedia += dias + " ";
+
             }
         }
 
