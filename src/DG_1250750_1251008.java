@@ -132,7 +132,7 @@ public class DG_1250750_1251008 {
         }
         System.out.println("|");
 
-        System.out.print("mood      : ");
+        System.out.print("mood      :");
 
         int somaPessoas = matriz.length;
         int somaValores = 0;
@@ -144,7 +144,7 @@ public class DG_1250750_1251008 {
             double media = (double) somaValores / somaPessoas;
 
 
-            System.out.printf(" %.1f ", media);
+            System.out.printf("%.1f ", media);
 
             somaValores = 0;
         }
