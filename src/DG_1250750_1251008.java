@@ -266,7 +266,7 @@ public class DG_1250750_1251008 {
         for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
             System.out.printf("Person #%d:%n",pessoa);
             int contador2=0;
-            for (int humor=MAX_MOOD; humor >=MIN_MOOD ; humor--) {
+            for (int humor=MAX_MOOD; humor >=MIN_MOOD ; humor--) {  //verificação da existencia de humor
                 int contador=0;
                 for (int dia = 0; dia < matriz[0].length; dia++) {
                     if (matriz[pessoa][dia]==humor){
@@ -286,6 +286,7 @@ public class DG_1250750_1251008 {
                     contador2++;
                 }
             }
+//===================Parte de baixo da tabela========================================================
             int dias5=5;
             System.out.print("Mood +");
             for (int dia = 0; dia < matriz[0].length; dia++) {
@@ -324,29 +325,30 @@ public class DG_1250750_1251008 {
 
     //=======================================================================================
     private static void humorSemelhante(int [][] matriz){
-        int primeiraPessoaSemelhante=0;
-        int segundaPessoaSemelhante=0;
-        int humorSemelhanteFinal=0;
-        int pessoa2=0;
-        for (int pessoa = (matriz.length)-1; pessoa >0; pessoa--) {
-            for (pessoa2 = pessoa-1;pessoa2>=0 ; pessoa2--) {
-                int humorSemelhante=0;
+        int primeiraPessoaSemelhante = 0;
+        int segundaPessoaSemelhante = 0;
+        int diasComHumorSemelhanteFinal = 0;
+        int pessoa1;
+        for (int pessoa2 = (matriz.length)-1; pessoa2 >0; pessoa2--) {
+            for (pessoa1 = pessoa2-1;pessoa1>=0 ; pessoa1--) {
+                int diasComHumorSemelhante=0;
                 for (int dia = 0; dia <matriz[0].length ; dia++) {
-                    if (matriz[pessoa][dia]==matriz[pessoa2][dia]){
-                        humorSemelhante++;
+                    if (matriz[pessoa2][dia]==matriz[pessoa1][dia]){
+                        diasComHumorSemelhante++;
                     }
                 }
-                if (humorSemelhante>=humorSemelhanteFinal){
-                    humorSemelhanteFinal=humorSemelhante;
-                    primeiraPessoaSemelhante=pessoa;
-                    segundaPessoaSemelhante=pessoa2;
+                if (diasComHumorSemelhante >= diasComHumorSemelhanteFinal){
+
+                    diasComHumorSemelhanteFinal = diasComHumorSemelhante;
+                    primeiraPessoaSemelhante = pessoa1;
+                    segundaPessoaSemelhante = pessoa2;
                 }
             }
         }
-        if (humorSemelhanteFinal==0){
+        if (diasComHumorSemelhanteFinal == 0){
             System.out.print("Nenhum");
         }else{
-            System.out.printf("j) People with the most similar moods: (person #%d and Person #%d have the same mood on %d days)",segundaPessoaSemelhante,primeiraPessoaSemelhante,humorSemelhanteFinal);
+            System.out.printf("j) People with the most similar moods: (person #%d and Person #%d have the same mood on %d days)",primeiraPessoaSemelhante,segundaPessoaSemelhante,diasComHumorSemelhanteFinal);
         }
 
         System.out.println();
