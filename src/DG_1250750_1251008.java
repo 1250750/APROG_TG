@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class DG_1250750_1251008 {
 
-    static File file = new File("src//input.txt");
+    static File file = new File("src\\input.txt");
     static Scanner input;
 
     static final int MAX_MOOD = 5;
@@ -15,8 +15,8 @@ public class DG_1250750_1251008 {
     static final int VAL_TERAPIA_MUSICA = 2;
     static final int VAL_TERAPIA_PSICOLOGICO = 5;
 
-    static final int MIN_PESSOAS = 0;
-    static final int MIN_DIAS = 0;
+    static final int MIN_PESSOAS = 1;
+    static final int MIN_DIAS = 1;
 
     public static void main(String[] args) throws FileNotFoundException {
 
@@ -70,12 +70,13 @@ public class DG_1250750_1251008 {
     // --- metodos reutilizaveis ----------------------------------------------------
 
     private static void imprimirCabecalhoDias(int numDias) {
-        System.out.print("day       : ");
+        System.out.print("day       :");
         for (int dia = 0; dia < numDias; dia++) {
-            System.out.printf(" %-2d ", dia);
+            System.out.printf("%3d ", dia); // cria dinamicamente o formato
         }
         System.out.println();
     }
+
 
     private static void imprimirSeparadorDias(int numDias) {
         System.out.print("----------");
