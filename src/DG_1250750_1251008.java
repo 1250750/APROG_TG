@@ -22,6 +22,7 @@ public class DG_1250750_1251008 {
         int tipoInput = escolherInput();
 
         if (tipoInput == 1) {
+            System.out.println("Insere os teus dados: 1");
             input = new Scanner(System.in);
         }
         else if (tipoInput == 2) {
@@ -29,6 +30,7 @@ public class DG_1250750_1251008 {
             Scanner teclado = new Scanner(System.in); // scanner temporário só para ler o caminho
             System.out.print("Insira o diretório do ficheiro a ler: ");
             String diretorio = teclado.nextLine();
+            teclado.close();
             File file = new File(diretorio);
 
             input = new Scanner(file);
