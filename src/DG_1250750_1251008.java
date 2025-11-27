@@ -294,8 +294,9 @@ public class DG_1250750_1251008 {
             }
             System.out.println();
             System.out.printf("%7d",0);
+            System.out.print("    ");
             for (int dia = 5; dia < matriz[0].length; dia+=5) {
-                System.out.printf("%5d",dia);
+                System.out.printf("%-5d",dia);
             }
             System.out.println();
         }
