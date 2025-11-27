@@ -204,7 +204,7 @@ public class DG_1250750_1251008 {
 
         // juntar todos os dias empatados
         for (int dias = 0; dias < mediasHumor.length; dias++) {
-            if (Math.abs(mediasHumor[dias] - maiorHumor) < 0.00001) { // verificação para doubles
+            if (Math.abs(mediasHumor[dias] - maiorHumor) < 0.00001) { // Verificação para doubles. Se a diferença entre os doubles for muito pequena, considera-se que são iguais
                 diasComMaiorMedia += dias + " ";
             }
         }
