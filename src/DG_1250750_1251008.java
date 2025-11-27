@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class DG_1250750_1251008 {
 
-    static File file = new File("src\\input.txt");
     static Scanner input;
 
     static final int MAX_MOOD = 5;
@@ -20,11 +19,27 @@ public class DG_1250750_1251008 {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        input = new Scanner(file);
+        int tipoInput = escolherInput();
+
+        if (tipoInput == 1) {
+            input = new Scanner(System.in);
+        }
+        else if (tipoInput == 2) {
+
+            Scanner teclado = new Scanner(System.in); // scanner temporário só para ler o caminho
+            System.out.print("Insira o diretório do ficheiro a ler: ");
+            String diretorio = teclado.nextLine();
+            File file = new File(diretorio);
+
+            input = new Scanner(file);
+        }
+
         input.nextLine(); // nao ler a primeira linha
 
-        int numeroPessoas = lerComMinimo(MIN_PESSOAS);
-        int dias = lerComMinimo(MIN_DIAS);
+
+
+        int numeroPessoas = lerComMinimo(MIN_PESSOAS, input);
+        int dias = lerComMinimo(MIN_DIAS, input);
 
         int[][] moods = new int[numeroPessoas][dias];
 
@@ -59,10 +74,29 @@ public class DG_1250750_1251008 {
         humorSemelhante(moods);
     }
 
+    private static int escolherInput() {
+        final int QUANTIDADE_OPCOES = 2;
+
+        Scanner sc = new Scanner(System.in);
+
+        int tipoInput;
+
+        System.out.println("Escolha o tipo de Input:");
+        System.out.println("1) Teclado");
+        System.out.println("2) Ficheiro de texto");
+        System.out.print("Selecione uma opção: ");
+
+        tipoInput = lerNoIntervalo(1, QUANTIDADE_OPCOES, sc);
+
+        return tipoInput;
+
+
+    }
+
     private static void armazenarMatriz(int[][] matriz){
         for (int numeroPessoas = 0; numeroPessoas < matriz.length; numeroPessoas++) {
             for (int dias = 0; dias < matriz[numeroPessoas].length; dias++) {
-                matriz[numeroPessoas][dias] = lerNoIntervalo(MIN_MOOD, MAX_MOOD);
+                matriz[numeroPessoas][dias] = lerNoIntervalo(MIN_MOOD, MAX_MOOD, input);
             }
         }
     }
@@ -293,7 +327,7 @@ public class DG_1250750_1251008 {
                 System.out.print("-");
             }
             System.out.println();
-            System.out.printf("%7d",0);
+            System.out.printf("%7d", 0);
             System.out.print("    ");
             for (int dia = 5; dia < matriz[0].length; dia+=5) {
                 System.out.printf("%-5d",dia);
@@ -355,19 +389,21 @@ public class DG_1250750_1251008 {
     }
 
     //======================================================================================
-    public static int lerNoIntervalo(int min, int max) {
+    public static int lerNoIntervalo(int min, int max, Scanner scanner) {
         int valor;
         do {
-            valor = input.nextInt();
+            valor = scanner.nextInt();
         } while (valor < min || valor > max);
+
         return valor;
     }
 
-    public static int lerComMinimo(int min) {
+    public static int lerComMinimo(int min, Scanner scanner) {
         int valor;
         do {
-            valor = input.nextInt();
+            valor = scanner.nextInt();
         } while (valor < min);
+
         return valor;
     }
 }
