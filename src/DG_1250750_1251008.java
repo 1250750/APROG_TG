@@ -288,16 +288,14 @@ public class DG_1250750_1251008 {
                 }
             }
 //===================Parte de baixo da tabela========================================================
-            int dias5=5;
             System.out.print("Mood +");
             for (int dia = 0; dia < matriz[0].length; dia++) {
                 System.out.print("-");
             }
             System.out.println();
             System.out.printf("%7d",0);
-            for (int dia = 1; dia < matriz.length; dia++) {
-                System.out.printf("%5d",dias5);
-                dias5+=5;
+            for (int dia = 5; dia < matriz[0].length; dia+=5) {
+                System.out.printf("%5d",dia);
             }
             System.out.println();
         }
