@@ -28,34 +28,34 @@ public class DG_1250750_1251008 {
 
         int[][] moods = new int[numeroPessoas][dias];
 
-        //alinea a
+        //alínea a
         armazenarMatriz(moods);
 
-        //alinea b
+        //alínea b
         imprimirMatriz(moods);
 
-        //alinea c
+        //alínea c
         mediaHumorPorDia(moods);
 
-        //alinea d
+        //alínea d
         mediaHumor(moods);
 
-        //alinea e
+        //alínea e
         maiorHumor(moods);
 
-        //alinea f
+        //alínea f
         percentagemHumor(moods);
 
-        //alinea g
+        //alínea g
         emocionalDisorders(moods);
 
-        //alinea h
+        //alínea h
         graficoHumor(moods);
 
-        //alinea i
+        //alínea i
         terapia(moods);
 
-        //alinea j
+        //alínea j
         humorSemelhante(moods);
     }
 
@@ -107,7 +107,7 @@ public class DG_1250750_1251008 {
         }
     }
 
-    // --- metodos reutilizaveis ----------------------------------------------------
+    // --- métodos reutilizáveis ----------------------------------------------------
 
     private static void imprimirCabecalhoDias(int numDias) {
         System.out.print("day       :");
@@ -292,7 +292,7 @@ public class DG_1250750_1251008 {
             }
         }
         if (!encontradasDisorders){
-            System.out.println("Ninguem");
+            System.out.println("Ninguém");
         }
 
         System.out.println();
@@ -307,7 +307,7 @@ public class DG_1250750_1251008 {
         for (int pessoa = 0; pessoa < matriz.length; pessoa++) {
             System.out.printf("Person #%d:%n",pessoa);
             int contador2=0;
-            for (int humor=MAX_MOOD; humor >=MIN_MOOD ; humor--) {  //verificação da existencia de humor
+            for (int humor=MAX_MOOD; humor >=MIN_MOOD ; humor--) {  //verificação da existência de humor
                 int contador=0;
                 for (int dia = 0; dia < matriz[0].length; dia++) {
                     if (matriz[pessoa][dia]==humor){
