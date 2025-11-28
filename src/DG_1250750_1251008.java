@@ -35,7 +35,7 @@ public class DG_1250750_1251008 {
         imprimirMatriz(moods);
 
         //alínea c
-        mediaHumorPorDia(moods);
+        calcularMediaHumorPorDia(moods);
 
         //alínea d
         mediaHumor(moods);
@@ -50,7 +50,7 @@ public class DG_1250750_1251008 {
         emocionalDisorders(moods);
 
         //alínea h
-        graficoHumor(moods);
+        fazerGraficoHumor(moods);
 
         //alínea i
         sugerirTerapia(moods);
@@ -189,7 +189,7 @@ public class DG_1250750_1251008 {
     }
 
     //================================================================================================
-    private static void mediaHumorPorDia(int[][] matriz){
+    private static void calcularMediaHumorPorDia(int[][] matriz){
 
         System.out.println("c) Average mood each day:");
 
@@ -299,7 +299,7 @@ public class DG_1250750_1251008 {
     }
 
     //==============================================================================
-    private static void graficoHumor(int [][] matriz){
+    private static void fazerGraficoHumor(int [][] matriz){
 
         System.out.println("h) People's Mood Level Charts:");
         System.out.println();
