@@ -53,7 +53,7 @@ public class DG_1250750_1251008 {
         graficoHumor(moods);
 
         //alínea i
-        terapia(moods);
+        sugerirTerapia(moods);
 
         //alínea j
         humorSemelhante(moods);
@@ -344,7 +344,7 @@ public class DG_1250750_1251008 {
     }
 
     //======================================================================================
-    private static void terapia(int[][] matriz){
+    private static void sugerirTerapia(int[][] matriz){
 
         System.out.println("i) Recommended therapy:");
 
