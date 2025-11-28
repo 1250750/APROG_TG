@@ -20,24 +20,7 @@ public class DG_1250750_1251008 {
     public static void main(String[] args) throws FileNotFoundException {
 
         int tipoInput = escolherInput();
-
-        if (tipoInput == 1) {
-            System.out.println("Insere os teus dados: 1");
-            input = new Scanner(System.in);
-        }
-        else if (tipoInput == 2) {
-
-            Scanner teclado = new Scanner(System.in); // scanner temporário só para ler o caminho
-            System.out.print("Insira o diretório do ficheiro a ler: ");
-            String diretorio = teclado.nextLine();
-            teclado.close();
-            File file = new File(diretorio);
-
-            input = new Scanner(file);
-        }
-
-        input.nextLine(); // nao ler a primeira linha
-
+        mudarScanner(tipoInput);
 
 
         int numeroPessoas = lerComMinimo(MIN_PESSOAS, input);
@@ -94,6 +77,27 @@ public class DG_1250750_1251008 {
 
 
     }
+
+    private static void mudarScanner(int tipoInput) throws FileNotFoundException {
+        if (tipoInput == 1) {
+            System.out.println("Insere os teus dados: ");
+            input = new Scanner(System.in);
+        }
+        else if (tipoInput == 2) {
+
+            Scanner teclado = new Scanner(System.in); // scanner temporário só para ler o caminho
+            System.out.print("Insira o diretório do ficheiro a ler: ");
+            String diretorio = teclado.nextLine();
+            teclado.close();
+            File file = new File(diretorio);
+
+            input = new Scanner(file);
+        }
+
+        input.nextLine(); // nao ler a primeira linha
+    }
+
+
 
     private static void armazenarMatriz(int[][] matriz){
         for (int numeroPessoas = 0; numeroPessoas < matriz.length; numeroPessoas++) {
