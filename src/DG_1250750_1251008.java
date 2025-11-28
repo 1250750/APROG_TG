@@ -17,8 +17,6 @@ public class DG_1250750_1251008 {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-
-
         int tipoInput = escolherInput();
         Scanner input = mudarScanner(tipoInput);
 
@@ -87,15 +85,12 @@ public class DG_1250750_1251008 {
         }
         else if (tipoInput == 2) {
 
-            Scanner teclado = new Scanner(System.in); // scanner temporário só para ler o caminho
             System.out.print("Insira o diretório do ficheiro a ler: ");
-            String diretorio = teclado.nextLine();
-            teclado.close();
+            String diretorio = input.nextLine();
             File file = new File(diretorio);
 
             input = new Scanner(file);
         }
-
 
         return input;
     }
