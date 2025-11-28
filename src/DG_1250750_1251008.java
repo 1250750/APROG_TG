@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 public class DG_1250750_1251008 {
 
-    static Scanner input;
-
     static final int MAX_MOOD = 5;
     static final int MIN_MOOD = 1;
 
@@ -19,17 +17,19 @@ public class DG_1250750_1251008 {
 
     public static void main(String[] args) throws FileNotFoundException {
 
+
+
         int tipoInput = escolherInput();
-        mudarScanner(tipoInput);
+        Scanner input = mudarScanner(tipoInput);
 
-
+        input.nextLine();
         int numeroPessoas = lerComMinimo(MIN_PESSOAS, input);
         int dias = lerComMinimo(MIN_DIAS, input);
 
         int[][] moods = new int[numeroPessoas][dias];
 
         //alínea a
-        armazenarMatriz(moods);
+        armazenarMatriz(moods, input);
 
         //alínea b
         mostrarMatriz(moods);
@@ -78,10 +78,12 @@ public class DG_1250750_1251008 {
 
     }
 
-    private static void mudarScanner(int tipoInput) throws FileNotFoundException {
+    private static Scanner mudarScanner(int tipoInput) throws FileNotFoundException {
+
+        Scanner input = new Scanner(System.in);
+
         if (tipoInput == 1) {
             System.out.println("Insere os teus dados: ");
-            input = new Scanner(System.in);
         }
         else if (tipoInput == 2) {
 
@@ -94,12 +96,16 @@ public class DG_1250750_1251008 {
             input = new Scanner(file);
         }
 
-        input.nextLine(); // nao ler a primeira linha
+
+        return input;
     }
 
 
 
-    private static void armazenarMatriz(int[][] matriz){
+
+
+    private static void armazenarMatriz(int[][] matriz, Scanner input){
+
         for (int numeroPessoas = 0; numeroPessoas < matriz.length; numeroPessoas++) {
             for (int dias = 0; dias < matriz[numeroPessoas].length; dias++) {
                 matriz[numeroPessoas][dias] = lerNoIntervalo(MIN_MOOD, MAX_MOOD, input);
